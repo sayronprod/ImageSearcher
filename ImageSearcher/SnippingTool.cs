@@ -14,6 +14,7 @@ namespace ImageSearcher
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             this.DoubleBuffered = true;
+            this.TopMost = true;
         }
 
         public static Image Snip()
