@@ -10,11 +10,16 @@ namespace ImageSearcher
         [STAThread]
         static void Main()
         {
-#if !DEBUG
-            StartupService.AddToSturtup();
-#endif
-            ApplicationConfiguration.Initialize();
-            Application.Run(new MainForm());
+            bool createdNew = true;
+            using (Mutex mutex = new Mutex(true, StartupService.AppName, out createdNew))
+            {
+                if (createdNew)
+                {
+                    StartupService.AddToSturtup();
+                    ApplicationConfiguration.Initialize();
+                    Application.Run(new MainForm());
+                }
+            }
         }
     }
 }
